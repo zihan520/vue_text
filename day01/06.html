@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>属性de绑定和属性的简写</title>
+</head>
+<body>
+	<div id="box">	
+		<!-- <img v-bind:src="url" alt=""> -->
+		<img :src="url" alt="">
+	</div>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+	<script>	
+			new Vue({
+				el:'#box',
+				data:{
+					url:'https://p1.ssl.qhimg.com/t0151320b1d0fc50be8.png'
+				}
+			})
+	</script>
+</body>
+</html>

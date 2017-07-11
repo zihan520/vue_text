@@ -7,10 +7,23 @@
 <body>
 	<div id="box">
 		<!-- @keydown,@keypress,@keyup -->
-		用户名: <input type="text" @keydown="show($event)">
+		<!-- 简化按键de判断 -->
+		<!-- 用户名: <input type="text" @keydown.enter="print"> -->
+		<!-- 用户名: <input type="text" @keydown.up="print"> -->
+		<!-- 用户名: <input type="text" @keydown.ctrl="print"> -->
+		<!-- 用户名: <input type="text" @keydown.a="print"> -->
+		<!-- 用户名: <input type="text" @keydown.f1="print"> -->
+		<button @click.once="out">只触发一次</button>
 	</div>
 	<script src="../bower_components/vue/dist/vue.js"></script>
 	<script>
+	/*
+	自定义键位别名
+	*/
+	Vue.config.keyCodes = {
+		a:65,
+		f1:112
+	}
 		new Vue({
 			el:'#box',
 			methods:{
@@ -19,6 +32,16 @@
 					if(e.keyCode ==13){
 						console.log("你按了回车键")
 					}
+				},
+				print(){
+					// console.log("你按了回车键");
+					// console.log("你按了up");
+					// console.log("你按了delete");
+					// console.log("你按了ctrl");
+					console.log("你按了f1");
+				},
+				out(){
+					console.log("aaa");
 				}
 			}
 		})
