@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="box">
+	用户名: <input type="text" v-model="name"><br>
+	{name}<br>
+	{{user}}
+</div>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+	<script>
+		new Vue({
+			el:'div',//vue2.0不允许将实例挂载在html或者是body元素上
+			data:{
+				name:'alice',//没有值也不能省略，要有声明
+				age:21,
+				arr:[1,2,3],
+				user:{name:'zhangsan',age:22,height:175,}
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子组件之间的通信</title>
+	<!-- <script src="js/vue.js"></script> -->
+	<script src="js/vue1.0.js"></script>
+</head>
+<body>
+	<div id="box">
+		<!-- <h3>父组件{{name}}</h3> -->
+		<h3>父组件{{user.name}}</h3>
+		<hr>
+		<!-- <my-work :username="name"></my-work> -->
+		<my-work :user="user"></my-work>
+	</div>
+	<template id="work">
+		<div>
+			<h3>子组件{{user.name}}</h3>
+			<h4>子组件访问父组件{{user.age}}</h4>
+			<button @click="change">change</button>
+		</div>
+	</template>
+	<script>
+		var vm=new Vue({
+			el:'#box',
+			data:{
+				user:{
+					name:'alice',
+					age:22
+				}
+			},
+			components:{
+				'my-work':{
+					template:'#work',
+					// props:['username'],
+					props:['user'],
+					// data(){
+					// 	return{
+					// 		msg:this.username,//存放在msg中
+					// 	}
+					// },
+					methods:{
+						change(){
+							this.user.name="jack"
+						}
+					},
+				}
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<div id="box">
+	<!-- <ul>
+		<li v-for="item in arr">{{item}}</li>
+	</ul> -->
+	<ul>
+		<!-- 作用：提高循环的效率，重用之前的元素 -->
+		<li v-for="(item,index) in arr" :key="index">{{index}}-{{item}}</li>
+	</ul>
+	<ul>
+		<li v-for="(item,index) in list">{{item}}-{{index}}</li>
+	</ul>
+</div>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+	<script>
+		new Vue({
+			el:'div',//vue2.0不允许将实例挂载在html或者是body元素上
+			data:{
+				arr:['zhangs','lisi','wangwu','zhaoliu','zhaouliu'],
+				list:{'name':'zhangsan','age':22,'weight':55,height:178}
+			}
+		})
+	</script>
+</body>
+</html>
