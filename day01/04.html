@@ -5,11 +5,16 @@
 	<title>阻止事件冒泡</title>
 </head>
 <body>
-	<div id="box" @click="open">
-		<p @click="print">
-			<!-- <button @click="show($event)">click me</button> -->
-			<button @click.stop="show($event)">click me</button>
-		</p>
+	<div id="box" >
+		<div @click="open">
+			<p @click="print">
+				<!-- <button @click="show($event)">click me</button> -->
+				<button @click.stop="show($event)">click me</button>
+			</p>
+		</div>
+		<hr>
+		<!-- 阻止默认事件 -->
+		<a href="#" type="button" @click.prevent="study($event)">点我</a>
 	</div>
 	<script src="../bower_components/vue/dist/vue.js"></script>
 	<script>
@@ -26,6 +31,10 @@
 				},
 				open(){
 					console.log("ccc")
+				},
+				study(e){
+					console.log('ddd');
+					// e.preventDefault()
 				}
 			}
 		})
