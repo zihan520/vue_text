@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义过滤器</title>
+	<style>	
+		
+	</style>
+</head>
+<body>
+	<div id="box">
+	<input type="text" v-model="date">	
+		<h1>{{date|dateFilter}}</h1>
+		<div>{{ff|number(1)}}</div>
+		<span>{{time|currentTime}}</span>
+	</div>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+	<script>
+	/**
+	 * 自定义过滤器
+	 * 
+	 */
+		// Vue.filter('dateFilter',function(value){
+		// 	return value < 10? '0'+value:value
+		// });
+		// 传参数的自定义过滤器
+		Vue.filter('number',function(value,num){
+			
+			return value.toFixed(num);
+		});
+		Vue.filter('currentTime',value=>{
+			let day = new Date(value);
+			return day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDay()+" "+day.getHours()+":"+day.getMinutes()
+		})
+			new Vue({
+				el:'#box',
+				data:{
+					date:12,
+					ff:3.1415926,
+					time:Date.now()
+				},
+				filters:{
+					dateFilter:(data)=>{
+						return data < 10? '0'+data:data
+					}
+				}
+			})
+	</script>
+</body>
+</html>

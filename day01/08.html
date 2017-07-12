@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模板</title>
+	<style>	
+		[v-cloak]{
+			display: none;
+		}
+		.aa{
+			color: #f60;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<input type="text" v-model="msg">
+		<!-- 防止闪烁 -->
+		<p>aaa<span v-cloak>{{msg}}</span></p>
+		<p v-text="msg"></p>
+		<p v-html="msg"></p>
+		<h4 v-once>{{msg}}</h4>
+		<div v-if="msg.length>0" :class="{aa:msg.length>0}">
+			{{msg}}
+		</div>
+		<!-- 不进行编译，写的什么就显示什么 -->
+		<span v-pre>{{msg}}</span>
+	</div>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+	<script>	
+			new Vue({
+				el:'#box',
+				data:{
+					msg:'hello people'
+				},
+				// created:function(){
+				// 	alert("aaa");
+				// }
+			})
+	</script>
+</body>
+</html>

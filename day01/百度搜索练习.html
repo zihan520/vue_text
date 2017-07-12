@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+	<script src="../bower_components/vue-resource/dist/vue-resource.min.js"></script>
+	<style>
+		.current{
+			background-color: #eee;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<input type="text" v-model="keyword" @keyup='getData($event)' @keydown.down="moveDown()" @keydown.up.prevent="moveUp()" @keydown.enter="enterInfo()">
+		<ul>
+			<li v-for="(item,index) in list" :class="{current:index == now}">{{item}}</li>
+		</ul>
+		<p v-if="list.length==0">暂无数据...</p>
+	</div>
+	<script>
+		new Vue({
+			el:'#box',
+			data:{
+				keyword:'',
+				list:[],
+				now:-1
+			},
+			methods:{
+				getData(e){
+					if(e.keyCode == 40||e.keyCode == 38) return;
+					this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+							params:{
+								wd:this.keyword
+							},
+							jsonp:'cb'
+						}).then(resp=>{
+							this.list=resp.data.s;
+						},resp=>{
+							console.log(resp.status)
+						})
+				},
+				moveDown(){
+					this.now++;
+					if(this.now >this.list.length){
+						this.now = 0;
+					}
+					this.keyword = this.list[this.now];
+				},
+				moveUp(){
+					this.now--;
+					if(this.now == -2){
+						this.now=this.list.length-1
+					}
+					this.keyword = this.list[this.now];
+				},
+				enterInfo(){
+					//https://www.baidu.com/s?ie=utf-8&newi=1&mod=1&isid=15ABDAE82D445901&wd=zhang&rsv_spt=1&rsv_iqid=0xad7aba590001e060&issp=1&f=8&rsv_bp=0&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_sug3=7&rsv_sug1=8&rsv_sug7=101&rsv_sug2=0&inputT=9507&rsv_sug4=13974&rsv_sid=1422_18194_21102_20880_20929&_ss=1&clist=6ca510a9a77a410c%096cd6e938c34acc2c%09245b9d1f75a89a72&hsug=&f4s=1&csor=5&_cr1=28440
+					// this.$http.jsonp('https://www.baidu.com/s',{
+					// 	params:{
+					// 		wd:this.keyword
+					// 	},
+					// 	jsonp:'cb'
+					// }).then(resp=>{
+					// 	window.location.href="https://www.baidu.com/s"
+					// })
+					window.location.href="http://www.baidu.com/s"
+				}
+			}
+		})
+	</script>
+</body>
+</html>

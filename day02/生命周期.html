@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="box">
+		{{msg}}<br>
+	<button @click="update()">update</button>
+	<button @click="destroy()">destroy</button>
+</div>
+	<script>
+		let vm=new Vue({
+			el:'#box',
+			data:{
+				msg:'hello'
+			},
+			methods:{
+				update(){
+					this.msg="welcome to 1865 E9";
+				},
+				destroy(){
+					// this.$destroy();
+					vm.$destory()
+				}
+			},
+			beforeCreate(){
+				alert("组件实例刚刚创建，还未进行数据观测和事件配置");
+			},
+			created(){
+				alert("实例已经创建完成，并且已经进行数据观测和事件配置");
+			},
+			beforeMount(){//常用
+				alert("模板编译之前，还没挂载");
+			},
+			mounted(){//常用
+				alert("模板编译之后，已经挂载，此时才会渲染页面，才能看到页面上数据的展示");
+			},
+			beforeUpdate(){
+				alert("组件更新之前");
+			},
+			updated(){
+				alert("组件更新之后");
+			},
+			beforeDestroy(){
+				alert("组件销毁之前");
+			},
+			destroyed(){
+				alert("组件销毁之后");
+			}
+		})
+	</script>
+</body>
+</html>
