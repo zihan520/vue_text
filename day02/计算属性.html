@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<h2>{{msg}}</h2>
+		<h2>{{msg2}}</h2>
+		<!-- <h3>{{reverseMsg}}</h3> -->
+		<h3>{{getNum2()}}</h3>
+		<input type="text" v-model="msg">
+		<br>
+		<button onclick="foo()">test</button>
+	</div>
+	<script>
+		let vm=new Vue({
+			el:'#box',
+			data:{
+				msg:'this is my address',
+			},
+			computed:{//计算属性
+				// msg2:'五塘和园'
+				msg2:function(){
+					return '五塘和园'
+				},
+				reverseMsg:function(){
+					console.log(new Date());
+					return this.msg.split(" ").reverse().join(" ");
+				}
+			},
+			methods:{
+				getNum2(){
+					console.log(new Date())
+					return this.msg.split(" ").reverse().join(" ");
+				}
+			}
+		})
+		 function foo(){
+		 	setInterval(function(){
+		 		console.log(vm.getNum2());
+		 	},1000)
+		 }
+	</script>
+</body>
+</html>
