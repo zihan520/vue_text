@@ -20,7 +20,10 @@
 				user:{
 					name:'张老三',
 					id:'1001'
-				}
+				},
+			},
+			student:{
+				stuName:'zhangsan',
 			},
 			methods:{
 				update(){
@@ -28,15 +31,23 @@
 				},
 				doAdd(){
 					// this.user.age=12
-					if(this.user.age){
-						this.user.age++
-					}else{
+					// if(this.user.age){
+					// 	this.user.age++
+					// }else{
 
-						// this.$set(this.user,'age',18);
-						Vue.set(this.user,'age',10);
-					}
-					// this.$set(this.user,'age',18);
-					console.log(this.user);
+					// 	// this.$set(this.user,'age',18);
+					// 	Vue.set(this.user,'age',10);
+					// }
+					// // this.$set(this.user,'age',18);
+					// console.log(this.user);
+
+					//set是对data里面的对象进行修改
+					// this.$set(this.student,'age',20);
+					// if(this.student.age){
+					// 	this.set(student,'age',20);
+					// }else{
+					// 	this.set(student,'age',20);
+					// }
 				},
 				deleteDate(){
 					if(this.user.age){

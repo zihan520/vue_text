@@ -9,17 +9,40 @@
 	<div id="box">
 		<input type="text" v-model="name">
 		<p>{{name}}</p>
+		<input type="text" v-model="email">
+		<p>{{email}}</p>
+		<input type="text" v-model="user.id">
+		<p>{{user.id}}</p>
+		<input type="text" v-model="user.nickname">
+		<p>{{user.nickname}}</p>
 	</div>
 	<script>
 		let vm =new Vue({
 			el:'#box',
 			data:{
-				name:'zhangsan'
+				name:'zhangsan',
+				email:'1145131890@qq.com',
+				user:{
+					id:'1101',
+					nickname:'lili'
+				}
+			},
+			watch:{
+				email:function(newVal,oldVal){
+					console.log("email被修改修改了，新值："+newVal+"原值："+oldVal);
+				},
+				user:{//深度监视
+					handler:function(newVal,oldVal){
+						console.log("user的id被修改修改了，新值："+newVal.id+"原值："+oldVal.id);
+						// console.log("user的nickname被修改修改了，新值："+newVal.nickname+"原值："+oldVal.nickname);
+					},
+					deep:true
+				}
 			}
 		});
 		vm.$watch('name',function(newVal,oldVal){
 			console.log("name的值被修改了！！！新值："+newVal)
-		})
+		},true)//表示深度监视
 	</script>
 </body>
 </html>
