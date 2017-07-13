@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实例的方法(数据)</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		{{user.name}}<br>
+		{{user.id}} <br>
+		<p>{{user.age}}</p>
+		<button @click="update">更新数据</button>
+		<button @click="doAdd">添加数据</button>
+		<button @click="deleteDate">删除数据</button>
+	</div>
+	<script>
+		new Vue({
+			data:{
+				user:{
+					name:'张老三',
+					id:'1001'
+				}
+			},
+			methods:{
+				update(){
+					this.user.name="李老四"
+				},
+				doAdd(){
+					// this.user.age=12
+					if(this.user.age){
+						this.user.age++
+					}else{
+
+						// this.$set(this.user,'age',18);
+						Vue.set(this.user,'age',10);
+					}
+					// this.$set(this.user,'age',18);
+					console.log(this.user);
+				},
+				deleteDate(){
+					if(this.user.age){
+
+						// delete this.user.age
+						Vue.delete(this.user,'age');
+					}
+				}
+			}
+		}).$mount('#box');
+	</script>
+</body>
+</html>

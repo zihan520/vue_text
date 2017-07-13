@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实例的属性和方法</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<!-- 
+		常用的vm.$el,vm.$data,vm.$options,vm.$refs
+	 -->
+	 <div id="box">
+	 	{{msg}}
+	 	<h1 ref="every">everybody fly</h1>
+	 	<div ref="name">{{name}}</div>
+	 </div>
+	 <script>
+	 	// let vm=new Vue({
+	 	// 	data:{
+	 	// 		msg:'welcome to 1865 E9',
+	 	// 	},
+	 	// 	num:false,
+	 	// 	name:'alice',
+	 	// 	age:22,
+	 	// 	show:function(){
+	 	// 		console.log('go go go');
+	 	// 	},
+	 	// 	methods:{
+
+	 	// 	}
+	 	// });
+	 	/**
+	 	 * 属性
+	 	 */
+	 	//vm.属性名 获取data中的属性
+	 	// console.log(vm.msg);
+	 	
+	 	//vm.$el 获取vue实例关联的元素
+	 	// console.log(vm.$el);//DOM对象
+	 	// vm.$el.style.color="#f60"
+
+	 	//vm.$data 获取数据对象data
+	 	// console.log(vm.$data);
+	 	// console.log(vm.$data.num);
+	 	// console.log(vm.$methods);
+	 	
+	 	//vm.$options 获取自定义属性
+	 	// console.log(vm.$options)
+	 	// console.log(vm.$options.name);
+	 	// console.log(vm.$options.age);
+	 	// vm.$options.show();
+
+
+	 	//vm.$refs,获取页面中的元素
+	 	// console.log(vm.$refs);
+	 	// console.log(vm.$refs.every);
+	 	
+
+	 	/**
+	 	 * 方法
+	 	 */
+	 	/**
+	 	 * 常用的方法vm.$mount(),vm.$detroy,vm.$nextTick() (方法/生命周期)
+	 	 * vm.$set(),vm.$delete(),vm.$watch()  (方法/数据)
+	 	 */
+	 	//vm.$mount() 手动挂载vue实例
+	 	// vm.$mount("#box");
+	 	let vm=new Vue({
+	 		data:{
+	 			msg:'my heart is detroyed',
+	 			name:'mick'
+	 		}
+	 	}).$mount('#box');
+	 	// vm.$destroy() 完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器
+	 	// vm.$destroy()
+	 	// console.log(vm.$data.msg);
+	 	 
+	 	
+	 	//vm.$nextTick( [callback] ) DOM更新完成之后执行回调函数 一般在数据更新之后使用该方法，以便获取更新之后的DOM
+	 	vm.name="麦克"
+	 	// DOM还没更新完，Vue实现响应式并不是数据发生改变之后DOM立即变化，需要按一定的策略进行DOM更新，需要时间！！
+	 	// console.log(vm.$refs.name.textContent);
+	 	vm.$nextTick(function(){
+	 		//DOM更新完成，更新完成后再执行此代码
+	 		console.log(vm.$refs.name.textContent);
+	 	})
+	 </script>
+</body>
+</html>

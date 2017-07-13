@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<input type="text" v-model="name">
+		<p>{{name}}</p>
+	</div>
+	<script>
+		let vm =new Vue({
+			el:'#box',
+			data:{
+				name:'zhangsan'
+			}
+		});
+		vm.$watch('name',function(newVal,oldVal){
+			console.log("name的值被修改了！！！新值："+newVal)
+		})
+	</script>
+</body>
+</html>

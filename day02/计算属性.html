@@ -10,37 +10,57 @@
 		<h2>{{msg}}</h2>
 		<h2>{{msg2}}</h2>
 		<!-- <h3>{{reverseMsg}}</h3> -->
-		<h3>{{getNum2()}}</h3>
+		<!-- <h3>{{getNum2()}}</h3> -->
 		<input type="text" v-model="msg">
 		<br>
 		<button onclick="foo()">test</button>
+		<hr>
+		<div>{{num1}}</div>
+		<div>{{num2}}</div>
+		<button @click="change">改变num2的值</button>
 	</div>
 	<script>
 		let vm=new Vue({
 			el:'#box',
 			data:{
 				msg:'this is my address',
+				num1:7
 			},
 			computed:{//计算属性
 				// msg2:'五塘和园'
 				msg2:function(){
 					return '五塘和园'
 				},
+				//如果结果相同，计算属性会从缓存中获取相应的值
+				//发生重新渲染，但是method调用总会执行该函数
+				//计算属性只有在它的相关依赖发生改变时才会重新求值
 				reverseMsg:function(){
 					console.log(new Date());
 					return this.msg.split(" ").reverse().join(" ");
+				},
+				num2:{
+					get:function(){
+						return this.num1-1
+					},
+					set:function(){
+						this.num1 = 13
+					}
 				}
 			},
 			methods:{
 				getNum2(){
 					console.log(new Date())
 					return this.msg.split(" ").reverse().join(" ");
+				},
+				change(){
+					this.num2 = 13;
 				}
 			}
 		})
 		 function foo(){
 		 	setInterval(function(){
-		 		console.log(vm.getNum2());
+		 		console.log(vm.reverseMsg);
+		 		// console.log(vm.getNum2());
 		 	},1000)
 		 }
 	</script>
