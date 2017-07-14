@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子组件及组件间数值的传递</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<my-hello></my-hello>
+		<!-- <my-world></my-world> -->
+	</div>
+	<template id="hello">
+		<div>
+			<h2>这是hello父组件</h2>
+			<h2>{{msg}},{{name}},{{age}}岁,{{user.username}}</h2>
+			<hr>
+			<!-- 子组件只能在父组件内使用 -->
+			<my-world :message="msg" :age="age"></my-world>
+		</div>
+	</template>
+	<template id="world">
+		<div>
+			<h4>这是world子组件</h4>
+			<h2>{{message}}</h2>
+		</div>
+	</template>
+	<script>
+		new Vue({
+			el:'#box',
+			data:{
+
+			},
+			components:{
+				'my-hello':{
+					template:'#hello',
+					data:()=>{
+						return {
+							msg:'1865 E9',
+							name:'alice',
+							age:22,
+							user:{'id':9527,username:'秋香'}
+						}
+					},
+					components:{
+						'my-world':{
+							template:'#world',
+							props:['message']
+						},
+					}
+				}
+			}
+		})
+	</script>
+</body>
+</html>

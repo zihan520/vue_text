@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态组件</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<!-- <my-world></my-world>
+		<my-hello></my-hello> -->
+		<!-- 
+			多个组件使用同一个挂载点，然后可以来回切换这些组件
+		 -->
+		<button @click="flag='my-world'">显示my-world</button>
+		<button @click="flag='my-hello'">显示my-hello</button>
+		<!-- 选项卡只是切换，而不是重新渲染 
+		使用keep-alive组件缓存非活动组件，可以保留状态，避免重新渲染，默认每次都会销毁非活动组件并重新创建
+		-->
+		<keep-alive>
+			<component :is="flag"></component>
+		</keep-alive>
+	</div>
+	<script>
+		new Vue({
+			el:'#box',
+			data:{
+				flag:'my-world'
+			},
+			components:{
+				'my-world':{
+					template:'<p>我是my-world的组件:{{x}}</p>',
+					data(){
+						return {
+							x:parseInt(Math.random()*10)
+						}
+					}
+				},
+				'my-hello':{
+					template:'<p>我是my-hello的组件:{{x}}</p>',
+					data(){
+						return {
+							x:parseInt(Math.random()*10)
+						}
+					}
+				},
+			}
+		})
+	</script>
+</body>
+</html>

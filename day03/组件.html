@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>定义组件的两种方式</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<hello></hello>
+		<my-content></my-content>
+	</div>
+	<script>
+		//Vue.component( id, [definition] )
+		// let vm=new Vue({
+		// 	el:'#box',
+		// 	component:{
+		// 		'my-content'
+		// 	}
+		// })
+		
+		/**
+		 * 方式一：
+		 */
+		//使用Vue.extent创建组件构造器
+		let Profile = Vue.extend({
+			template:'<h4>{{msg}}</h4>',
+			data:function(){
+				return {
+					msg:'1145131890'
+				}
+			}
+		});
+		//使用Vue.component(标签名，组件构造器),根据组件构造器创建组件
+		Vue.component("hello",Profile);
+		/**
+		 * 
+		 * 方式二
+		 * 直接创建
+		 */
+		Vue.component('my-content',{
+			template:'<h3>content is about my life</h3>'
+		})
+
+		new Vue({//也是一个组件(根组件)
+			el:'#box'
+		})
+	</script>
+</body>
+</html>

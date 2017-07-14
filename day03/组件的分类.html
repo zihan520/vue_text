@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<my-header></my-header>
+		<my-footer></my-footer>
+	</div>
+	<script>
+		/**
+		 * 全局组件
+		 */
+		Vue.component('my-header',{
+			template:'<header>{{head}}</header>',
+			data(){//子组件的返回值是一个函数
+				return {
+					head:'big head'
+				}
+			}
+		})
+		/**
+		 * 局部组件
+		 * @type {String}
+		 */
+		new Vue({
+			el:'#box',
+			components:{
+				'my-footer':{
+					template:'<footer>{{foot}}</footer>',
+					data:()=>{
+						return {
+							foot:'two foot'
+						}
+					}
+				}
+			}
+		})
+	</script>
+</body>
+</html>
