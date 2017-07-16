@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>单向数据流</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<my-hello></my-hello>
+	</div>
+	<template id="hello">
+		<div>
+			<h3>{{name}}</h3>
+			<input type="text" v-model="name">
+			<p>{{user.age}}</p>
+			<my-world :name.sync="name" :user="user"></my-world>
+		</div>
+	</template> 
+	<template id="world">
+		<div>
+			<h2>{{name}}</h2>
+			<p>{{user.age}}</p>
+			<button @click="change">改变父组建传过来de值</button>
+		</div>
+	</template>
+	<script>
+		new Vue({
+			el:'#box',
+			components:{
+				'my-hello':{
+					data(){
+						return {
+							name:'zhangsan',
+							user:{
+								uname:'tonny',
+								age:16,
+							}
+						}
+					},
+					template:'#hello',
+					components:{
+						'my-world':{
+							template:'#world',
+							data(){
+								return {
+									username:this.name//方式1：将数据存入另一个变量中再操作
+
+								}
+							},
+							props:{
+								name:{
+									type:String,
+									default:'zhanglaosan'
+								},
+								user:Object
+							},
+							// computed:{
+							// 	myName(){
+							// 		return this.name
+							// 	}
+							// },
+							methods:{
+								change(){
+									// this.username = "lisi"
+									//方式二：子组建改变时，父组建也跟着改变 a.使用.sync，需要显式地触发一个更新事件
+									// this.$emit('update:name','alice'); 
+									this.user.age=22
+								}
+							}
+						}
+					}
+				}
+			}
+		}) 
+	</script>
+</body>
+</html>

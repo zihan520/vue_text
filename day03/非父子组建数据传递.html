@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<aa></aa>
+		<bb></bb>
+		<cc></cc>
+	</div>
+	<template id="aa">
+		<div>
+			<h4>{{name}}</h4>
+			<button @click="send">把name发送给c</button>
+		</div>
+	</template>
+	<template id="bb">
+		<div>
+			<h4>{{age}}</h4>
+		</div>
+	</template>
+	<template id="cc">
+		<div>
+			<h4>{{name}}</h4>
+			<h4>{{age}}</h4>
+		</div>
+	</template>
+	<script>
+		new Vue({
+			el:'#box',
+			components:{
+				'aa':{
+					template:'#aa',
+					data(){
+						return {
+							name:'谷歌'
+						}
+					},
+					methods:{
+						send(){
+							this.$emit('data-a',this.name);
+						}
+					}
+				},
+				'bb':{
+					template:'#bb',
+					data(){
+						return {
+							age:18
+						}
+					}
+				},
+				'cc':{
+					template:'#cc',
+					data(){
+						return {
+							age:-1,
+							name:''
+						}
+					},
+					mounted(){
+						this.$on("data-a",name=>{
+							this.name= name
+						})
+					}
+				},
+			}
+		})
+	</script>
+</body>
+</html>
