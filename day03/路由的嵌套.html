@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../bower_components/vue/dist/vue.js"></script>
+	<script src="../bower_components/vue-router/dist/vue-router.js"></script>
+	<style>
+		.router-link-active{
+			color: #f60;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<router-link to="/home">首页</router-link>
+		<router-link to="/user">用户</router-link>
+		<div>
+			<router-view></router-view>
+		</div>
+	</div>
+	<template id="user">
+		<div>
+			<ul>
+				<router-link to="/user/name">用户名</router-link>
+				<router-link to="/user/psd">密码</router-link>
+			</ul>
+			<div>
+				<router-view></router-view>
+			</div>
+		</div>
+	</template>
+	<script>
+		var Home ={
+			template:'<p>这是首页</p>'
+		}
+		var News = {
+			template:'#user'
+		}
+		var Name ={
+			template:'<input type="text" name="" value="alice">'
+		}
+		var Psd = {
+			template:'<input type="text" name="" value="123456">'
+		}
+		var routes= [
+			{
+				path:'/home',
+				component:Home
+			},
+			{
+				path:'/user',
+				component:News,
+				children:[
+					{
+						path:'name',
+						component:Name
+					},
+					{
+						path:'psd',
+						component:Psd
+					}
+				]
+			},
+			{
+				path:'*',
+				redirect:'/home'
+			}
+		]
+		var router = new VueRouter({
+			routes,
+
+		})
+		new Vue({
+			el:'#box',
+			router
+		})
+	</script>
+</body>
+</html>
